@@ -1,0 +1,107 @@
+/* Aplica box-sizing para evitar desbordes */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Evita el desplazamiento horizontal */
+}
+
+.header {
+  width: 100%;
+  height: 15%; /* Aumentar la cabecera para destacar el logo */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70%;
+  gap: 30px;
+}
+
+.input {
+  width: 500px;
+  height: 50px;
+  text-align: center;
+  font-size: 15px;
+  border: none;
+  box-shadow: 0px 10px 20px #00000037;
+  border-radius: 10px;
+}
+
+.button {
+  width: 500px;
+  height: 70px;
+  background-color: rgb(28, 90, 189);
+  border: none;
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.button:hover {
+  background-color: rgb(34, 111, 234);
+  transform: scale(1.1);
+}
+
+.footer {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.logo {
+  width: 120px; /* Aumentar tamaño del logo */
+  height: auto; /* Mantener proporción */
+  object-fit: contain; /* Evitar deformaciones */
+}
+
+.contactLink {
+  color: rgb(28, 90, 189);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px; /* Más visible */
+  padding: 10px 20px; /* Espaciado interno */
+  border-radius: 5px; /* Diseño más moderno */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contactLink:hover {
+  color: white;
+  background-color: rgb(28, 90, 189);
+}
+
+.registerLink {
+  margin-top: 20px;
+  color: rgb(28, 90, 189);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px; /* Más visible */
+  transition: color 0.3s ease;
+  text-align: center;
+}
+
+.registerLink:hover {
+  color: rgb(34, 111, 234);
+}

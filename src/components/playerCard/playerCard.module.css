@@ -1,0 +1,88 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .playerImage {
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .name {
+    margin: 10px 0;
+    font-size: 1.3rem;
+    color: #333;
+  }
+  
+  .club {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+  }
+  
+  .clubLogo {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+  
+  .position {
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .nationalities {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .nationality {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .flag {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+  }
+  
+  .marketValue,
+  .differenceValue,
+  .age {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #777;
+  }
+  
+  /* Estilo destacado */
+  .highlighted {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(28, 90, 189);
+  }
+  

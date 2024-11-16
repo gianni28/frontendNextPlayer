@@ -1,0 +1,39 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+  }
+  
+  .pageButton {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .pageButton:hover {
+    background-color: rgb(28, 90, 189);
+    color: white;
+  }
+  
+  .pageButton:disabled {
+    cursor: not-allowed;
+    background-color: #e0e0e0;
+  }
+  
+  .active {
+    background-color: rgb(28, 90, 189);
+    color: white;
+  }
+  
+  .ellipsis {
+    font-size: 14px;
+    color: #888;
+    margin: 0 5px;
+  }
+  
