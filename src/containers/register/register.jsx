@@ -13,7 +13,7 @@ export default function Register() {
       const body = { username, password };
 
       try {
-        const response = await fetch("http://localhost:5000/api/register", {
+        const response = await fetch("https://backendnextplayer.onrender.com/api/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
