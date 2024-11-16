@@ -8,6 +8,7 @@ export default function LoginContainer() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     if (username !== "" && password !== "") {
@@ -29,7 +30,7 @@ export default function LoginContainer() {
             icon: "success",
           }).then(() => {
             // Almacena el estado de autenticación en localStorage
-            localStorage.setItem("isAuthenticated", "true");
+            login();
 
             // Redirige a la página de jugadores
             navigate("/jugadores");
