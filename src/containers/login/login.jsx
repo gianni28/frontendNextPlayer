@@ -23,14 +23,19 @@ export default function LoginContainer() {
         });
 
         if (response.ok) {
+          // Si la respuesta es exitosa, mostramos la alerta
           Swal.fire({
             title: "Inicio de sesión exitoso",
             icon: "success",
           }).then(() => {
+            // Almacena el estado de autenticación en localStorage
             localStorage.setItem("isAuthenticated", "true");
+
+            // Redirige a la página de jugadores
             navigate("/jugadores");
           });
         } else {
+          // Si la respuesta no es exitosa, muestra el error
           Swal.fire({
             title: "Error en las credenciales",
             text: "Por favor, verifica tu usuario y contraseña",
@@ -38,6 +43,7 @@ export default function LoginContainer() {
           });
         }
       } catch (err) {
+        // Si hay un error en la conexión
         Swal.fire({
           title: "Error",
           text: "Hubo un problema al conectarse con el servidor",
@@ -45,6 +51,7 @@ export default function LoginContainer() {
         });
       }
     } else {
+      // Si hay campos vacíos
       Swal.fire({
         title: "Error",
         text: "Por favor, completa todos los campos",
@@ -82,7 +89,7 @@ export default function LoginContainer() {
         </button>
       </div>
       <a href="/register" className={styles.registerLink}>
-          ¿No tienes cuenta? Regístrate aquí
+        ¿No tienes cuenta? Regístrate aquí
       </a>
       <footer className={styles.footer}>
         <p>&copy; 2024 - Página increíble</p>
