@@ -29,6 +29,12 @@ export default function LoginContainer() {
           Swal.fire({
             title: "Inicio de sesión exitoso",
             icon: "success",
+          });
+          // Update auth state and navigate immediately
+          login();
+          navigate("/jugadores");
+            title: "Inicio de sesión exitoso",
+            icon: "success",
           }).then(() => {
             // Almacena el estado de autenticación en localStorage
             login();
@@ -39,6 +45,12 @@ export default function LoginContainer() {
         } else {
           // Si la respuesta no es exitosa, muestra el error
           Swal.fire({
+            title: "Inicio de sesión exitoso",
+            icon: "success",
+          });
+          // Update auth state and navigate immediately
+          login();
+          navigate("/jugadores");
             title: "Error en las credenciales",
             text: "Por favor, verifica tu usuario y contraseña",
             icon: "error",
@@ -46,7 +58,13 @@ export default function LoginContainer() {
         }
       } catch (err) {
         // Si hay un error en la conexión
-        Swal.fire({
+          Swal.fire({
+            title: "Inicio de sesión exitoso",
+            icon: "success",
+          });
+          // Update auth state and navigate immediately
+          login();
+          navigate("/jugadores");
           title: "Error",
           text: "Hubo un problema al conectarse con el servidor",
           icon: "error",
@@ -54,7 +72,13 @@ export default function LoginContainer() {
       }
     } else {
       // Si hay campos vacíos
-      Swal.fire({
+          Swal.fire({
+            title: "Inicio de sesión exitoso",
+            icon: "success",
+          });
+          // Update auth state and navigate immediately
+          login();
+          navigate("/jugadores");
         title: "Error",
         text: "Por favor, completa todos los campos",
         icon: "error",

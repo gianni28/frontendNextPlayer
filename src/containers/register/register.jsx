@@ -78,10 +78,16 @@ export default function Register() {
         <button onClick={handleRegister} className={styles.button}>
           Registrarse
         </button>
+      <p>
+        Already have an account? <a href="/login" className={styles.link}>Login</a>
+      </p>
       </div>
       <footer className={styles.footer}>
         <p>&copy; 2024 - Página increíble</p>
       </footer>
+      <p>
+        Already have an account? <a href="/login" className={styles.link}>Login</a>
+      </p>
     </div>
   );
 }
