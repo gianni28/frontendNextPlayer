@@ -6,11 +6,13 @@ import styles from "./register.module.css"; // Importar los estilos
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Estado para manejar la carga
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     if (username !== "" && password !== "") {
       const body = { username, password };
+      setIsLoading(true); // Mostrar indicador de carga
 
       try {
         const response = await fetch("https://backendnextplayer.onrender.com/api/register", {
@@ -41,6 +43,8 @@ export default function Register() {
           text: "Hubo un problema al conectarse con el servidor",
           icon: "error",
         });
+      } finally {
+        setIsLoading(false); // Ocultar indicador de carga
       }
     } else {
       Swal.fire({
@@ -59,14 +63,21 @@ export default function Register() {
           Contact
         </a>
       </header>
+      {isLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.spinner}></div>
+          <p className={styles.loadingText}>Cargando...</p>
+        </div>
+      )}
       <h1>Bienvenido/a!</h1>
-      <div className={styles.form}>
+      <div className={styles.form} style={{ opacity: isLoading ? 0.5 : 1 }}>
         <input
           type="text"
           placeholder="Usuario"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className={styles.input}
+          disabled={isLoading} // Deshabilitar input mientras carga
         />
         <input
           type="password"
@@ -74,13 +85,18 @@ export default function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={styles.input}
+          disabled={isLoading} // Deshabilitar input mientras carga
         />
-        <button onClick={handleRegister} className={styles.button}>
+        <button
+          onClick={handleRegister}
+          className={styles.button}
+          disabled={isLoading} // Deshabilitar botón si está cargando
+        >
           Registrarse
         </button>
-      <a href="/login" className={styles.loginLink}>
-        ¿Ya tienes cuenta? Inicia sesión aquí
-      </a>
+        <a href="/login" className={styles.loginLink}>
+          ¿Ya tienes cuenta? Inicia sesión aquí
+        </a>
       </div>
       <footer className={styles.footer}>
         <p>&copy; 2024 - Página increíble</p>

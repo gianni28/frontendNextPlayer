@@ -1,46 +1,79 @@
 .container {
-    padding: 20px;
-    text-align: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cartas horizontales */
+  gap: 20px;
+  justify-content: center;
+  align-items: start;
+  margin-top: 20px;
+}
+
+/* Indicador de carga */
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(28, 90, 189, 0.3);
+  border-top-color: #1c5abd;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cartas horizontales */
-    gap: 20px;
-    justify-content: center;
-    align-items: start;
-    margin-top: 20px;
+  to {
+    transform: rotate(360deg);
   }
-  
-  .loading {
-    font-size: 1.5rem;
-    color: #666;
-  }
-  
-  .sorting {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .sorting label {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .sorting select {
-    padding: 5px 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .sorting select:hover {
-    border-color: rgb(28, 90, 189);
-  }
-  
+}
+
+.loadingText {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #1c5abd;
+}
+
+.sorting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.sorting label {
+  font-size: 14px;
+  color: #555;
+}
+
+.sorting select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sorting select:hover {
+  border-color: rgb(28, 90, 189);
+}

@@ -8,12 +8,14 @@ import styles from "./login.module.css"; // Importar tus estilos
 export default function LoginContainer() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Estado para manejar la carga
   const navigate = useNavigate();
   const { login } = useAuth();
 
   const handleLogin = async () => {
     if (username !== "" && password !== "") {
       const body = { username, password };
+      setIsLoading(true); // Mostrar indicador de carga
 
       try {
         const response = await fetch("https://backendnextplayer.onrender.com/api/login", {
@@ -44,6 +46,8 @@ export default function LoginContainer() {
           text: "Hubo un problema al conectarse con el servidor",
           icon: "error",
         });
+      } finally {
+        setIsLoading(false); // Ocultar indicador de carga
       }
     } else {
       Swal.fire({
@@ -62,7 +66,13 @@ export default function LoginContainer() {
           Contact
         </a>
       </header>
-      <div className={styles.content}>
+      {isLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.spinner}></div>
+          <p className={styles.loadingText}>Cargando...</p>
+        </div>
+      )}
+      <div className={styles.content} style={{ opacity: isLoading ? 0.5 : 1 }}>
         <FaCircleUser size={60} color="rgb(28, 90, 189)" />
         <input
           type="text"
@@ -70,6 +80,7 @@ export default function LoginContainer() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className={styles.input}
+          disabled={isLoading} // Deshabilitar input mientras carga
         />
         <input
           type="password"
@@ -77,8 +88,13 @@ export default function LoginContainer() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={styles.input}
+          disabled={isLoading} // Deshabilitar input mientras carga
         />
-        <button onClick={handleLogin} className={styles.button}>
+        <button
+          onClick={handleLogin}
+          className={styles.button}
+          disabled={isLoading} // Deshabilitar botón si está cargando
+        >
           Iniciar sesión
         </button>
       </div>

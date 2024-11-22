@@ -16,37 +16,37 @@ export default function PlayerList() {
 
   useEffect(() => {
     const fetchPlayers = async () => {
-        try {
-          const response = await api.get("/data");
-          console.log("Datos de los jugadores:", response.data); // Depuración
-      
-          const sortedPlayers = response.data
-            .map((player) => ({
-              ...player,
-              market_value: convertValueToNumber(player.market_value), // Convertir market_value
-              difference_value: convertValueToNumber(player.difference_value), // Convertir difference_value
-              age: parseInt(player.age, 10) || 0, // Convertir edad a número
-            }))
-            .sort((a, b) => b.difference_value - a.difference_value); // Ordenar por defecto
-      
-          setPlayers(sortedPlayers);
-          setFilteredPlayers(sortedPlayers);
-          setLoading(false);
-        } catch (error) {
-          console.error("Error al obtener los jugadores:", error);
-          setLoading(false);
-        }
-      };            
+      try {
+        const response = await api.get("/data");
+        console.log("Datos de los jugadores:", response.data); // Depuración
+
+        const sortedPlayers = response.data
+          .map((player) => ({
+            ...player,
+            market_value: convertValueToNumber(player.market_value), // Convertir market_value
+            difference_value: convertValueToNumber(player.difference_value), // Convertir difference_value
+            age: parseInt(player.age, 10) || 0, // Convertir edad a número
+          }))
+          .sort((a, b) => b.difference_value - a.difference_value); // Ordenar por defecto
+
+        setPlayers(sortedPlayers);
+        setFilteredPlayers(sortedPlayers);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error al obtener los jugadores:", error);
+        setLoading(false);
+      }
+    };
     fetchPlayers();
   }, []);
 
   const convertValueToNumber = (value) => {
     if (!value) return 0; // Si el valor está vacío, devuelve 0
-  
+
     const normalizedValue = value
       .replace(/[^\d,.]/g, "") // Eliminar caracteres no numéricos (excepto coma/punto)
       .replace(",", "."); // Reemplazar coma por punto
-  
+
     if (value.includes("mill")) {
       // Si es en millones
       return parseFloat(normalizedValue) * 1_000_000;
@@ -54,10 +54,9 @@ export default function PlayerList() {
       // Si es en miles
       return parseFloat(normalizedValue) * 1_000;
     }
-  
+
     return parseFloat(normalizedValue) || 0; // Devolver valor numérico o 0
   };
-  
 
   const handleSearch = (term) => {
     const filtered = players.filter((player) =>
@@ -74,23 +73,21 @@ export default function PlayerList() {
   const handleSortChange = (criteria, direction) => {
     setSortCriteria(criteria);
     setSortDirection(direction);
-  
+
     const sorted = [...filteredPlayers].sort((a, b) => {
       const valueA = a[criteria] ?? 0; // Usar 0 si no existe el valor
       const valueB = b[criteria] ?? 0;
-  
+
       if (direction === "asc") {
         return valueA - valueB; // Orden ascendente
       } else {
         return valueB - valueA; // Orden descendente
       }
     });
-  
+
     setFilteredPlayers(sorted);
     setCurrentPage(1); // Reiniciar a la primera página al cambiar el orden
   };
-  
-  
 
   // Calcular los elementos para la página actual
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -98,7 +95,12 @@ export default function PlayerList() {
   const currentItems = filteredPlayers.slice(startIndex, endIndex);
 
   if (loading) {
-    return <p className={styles.loading}>Cargando jugadores...</p>;
+    return (
+      <div className={styles.loadingOverlay}>
+        <div className={styles.spinner}></div>
+        <p className={styles.loadingText}>Cargando jugadores...</p>
+      </div>
+    );
   }
 
   return (
@@ -129,7 +131,7 @@ export default function PlayerList() {
       </div>
       <div className={styles.grid}>
         {currentItems.map((player) => (
-            <PlayerCard key={player.id} player={player} sortCriteria={sortCriteria} />
+          <PlayerCard key={player.id} player={player} sortCriteria={sortCriteria} />
         ))}
       </div>
       <Pagination
