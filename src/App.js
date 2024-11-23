@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginContainer from "./containers/login/login";
 import PlayerList from "./containers/playerList/playerList"; // Asegúrate de que este archivo existe
@@ -5,24 +6,30 @@ import RegisterContainer from "./containers/register/register"; // Importa el co
 
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
-export default function App() {
-  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+function AppRoutes() {
+  const { isAuthenticated } = useAuth(); // Use context directly for authentication state
 
   return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<LoginContainer />} />
+      <Route path="/register" element={<RegisterContainer />} />
+      <Route
+        path="/jugadores"
+        element={
+          isAuthenticated ? <PlayerList /> : <Navigate to="/login" replace />
+        }
+      />
+    </Routes>
+  );
+}
+
+export default function App() {
+  return (
     <AuthProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<LoginContainer />} />
-        <Route path="/register" element={<RegisterContainer />} />
-        <Route
-          path="/jugadores"
-          element={
-            isAuthenticated ? <PlayerList /> : <Navigate to="/login" replace />
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </AuthProvider>
   );
 }
